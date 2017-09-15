@@ -1,3 +1,3 @@
-class Todo < ApplicationRecord
+class Todo < ActiveRecord::Base
   belongs_to :project
 end

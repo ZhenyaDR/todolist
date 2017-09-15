@@ -1,57 +1,116 @@
 ﻿<% provide(:title, 'Категории') %>
-<h1>Мои задачи</h1>
-
-      <a href="#" id="showus">
-				<%= image_tag("addTodoIcon.png")%>
-		</a>
-    <%@proj.each do |cat| %>
-
-<p>
-
-      <h1><%=cat.title %></h1>
-
-
-
-
-
-<%       Todo.where(project_id:cat.id).each do |tod|  %>
- 
-      <ul>
-	  <li><%= tod.text%></li>
-   </ul>
-    <%=tod.isCompleted%>
-    <%= link_to  "Удалить" ,tododelete_path(tod.id),method: :delete %>/
-    <%= link_to  "Редактировать" ,todoedit_path(tod.id),method: :post %>
-</p>
-
-
-<% end %>
-
-
-<% end %>
-
-<div id="forma" hidden><h1>Новая задача</h1>
-  <div class="form">
-    <%@todo =Todo.new%>
-      <%= form_for(@todo,  url:'/todocreate') do |f| %>
-	<%=f.select :project_id,options_for_select(Project.all.collect{ |u| [u.title,u.id]})  %>
-        <%= f.text_field :text,placeholder: 'Название задачи' %>
-<label>
-задача выполнена?
-        <%= f.check_box :isCompleted %>
-</label>    
-	
-	 <%= link_to "OK", '#', id: "li"%>
-	
-    <a href="#" id="formout">Отмена</a>  &nbsp;&nbsp
-		
-
-
-    <% end %>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin: 0px;background:  deepskyblue;">
+  <div class="navbar-header">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="glyphicon glyphicon-plus"></span>
+    </button>    
+    <a class="navbar-brand" href="#">Задачи</a>    
   </div>
+  <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+      <li>
+      
+      <a id="modal-127356" href="#modal-container-127356" role="button" class="btn" data-toggle="modal">
+        <span class="glyphicon glyphicon-plus"></span>
+      </a>
+      </li>      
+    </ul>
+  </div>
+</nav>
 
-</div>
+<div class="container-fluid" style="margin-top: 7%;">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+      <%@proj.each do |cat| %>
+        <div class="col-md-4">
+          <div class="list-group">
+             <a href="#" class="list-group-item"><%=cat.title%></a>
+    <% Todo.where(project_id:cat.id).each do |tod|  %>    
+            <div class="list-group-item">
+              <h4 class="list-group-item-heading">
+                                                
+                <%if tod.isComplete==true%>
+                <label>
+                <input ondblclick='func("id<%=tod.id%>")' class="btn btn-primary"  name="<%tod.id%>" type="checkbox" value='1' checked/>&nbsp;<strike><%=tod.text%> </strike>
+                </label>
+               <%else%>
+                <label>
+                <input class="btn btn-primary" ondblclick='func("id<%=tod.id%>")' name="<%tod.id%>" type="checkbox" value='1'/>&nbsp;<%=tod.text%>   
+                </label>              
+                <%end%>                                 
+					<div id="id<%=tod.id%>" style='display: none;'>
+					                <hr>
+					                    <%= link_to  "Удалить" ,tododelete_path(tod.id),method: :delete %>/
+					    		<%= link_to  "Редактировать" ,todoedit_path(tod.id),method: :post %>
+
+					 </div>
+
+              </h4> 
+            </div>
+            <% end %>
+            
+          </div>
+        </div>
+        <% end %>
+</div>    
+      
+      <div class="modal fade" id="modal-container-127356" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+               
+              <button type="button" class="close" data-dismiss="odal" aria-hidden="true">
+                ×
+              </button>
+              <h4 class="modal-title text-centre" id="myModalLabel">
+                Новая задача
+              </h4>
+            </div>
+            <div class="modal-body">
+                  <%@todo =Todo.new%>
+          <%= form_for(@todo,  url:'/todocreate') do |f| %>
+          <div class="form-group">
+            <%= f.text_field :text,placeholder: 'Название задачи',class:'form-control' %>
+            <div class="select">
+          <%=f.select(:project_id,options_for_select(Project.all.collect{ |u| [u.title,u.id]}),{},{:class=>"form-control"})  %>  
+          </div>
+        </div>
+        <% end %>
+  </div>
+           <div class="modal-footer">
+           <div style="text-align: center;">
+
+           <%= link_to "OK", '#', id: "li",class:'btn',style:"width: 40%;background:  deepskyblue;"%>
+           
+      	<a href="#" id="formout" class='btn' data-dismiss="modal" style="width: 40%; height='50px' ;background:  white;">Отмена</a>  &nbsp;&nbsp;
+      	  </div>
+         </div>
+           
+               
+      </div>
+            </div>
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>      
+<script type="text/javascript">
+	function func(argument) 
+	{
+		if (document.getElementById(argument).style.display=="none") {
+			document.getElementById(argument).style.display="block";
+		}else
+		document.getElementById(argument).style.display="none";
+
+		
+	}
+</script>
 
 
 
-  

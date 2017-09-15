@@ -39,7 +39,7 @@ class TodoController < ApplicationController
   end
 private
    def todo_params
-      return params.require(:todo).permit(:text,:isCompleted,:project_id)
+      return params.require(:todo).permit(:text,:isComplete,:project_id)
    end
 
   def set_tod

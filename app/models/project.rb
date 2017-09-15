@@ -1,3 +1,3 @@
-class Project < ApplicationRecord
-	has_many :todos
+class Project < ActiveRecord::Base
+	has_many :todos, dependent: :destroy
 end

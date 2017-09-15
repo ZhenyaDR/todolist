@@ -2,10 +2,8 @@
 
 one:
   text: MyString
-  isCompleted: false
-  project: one
+  isComplete: false
 
 two:
   text: MyString
-  isCompleted: false
-  project: two
+  isComplete: false
