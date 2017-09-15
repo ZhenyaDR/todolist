@@ -15,23 +15,24 @@
 # gem 'pg'
 #
 default: &default
+  database: d7c996ieo37bei
   adapter: postgresql
-  encoding: unicode
-  username: postgres
-  password: 1
-  host: localhost
+  encoding: unicode  
+  username: vjzsoqvyhyllrl
+  password: 0530a93d66a959ed8eff8ebf7915508643f3f036fb282453d96aa955ac6c208b
+  host: ec2-54-225-88-199.compute-1.amazonaws.com
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
   <<: *default
-  database: blog_development
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: 1
-  host: localhost
+  database: d7c996ieo37bei    
+  username: vjzsoqvyhyllrl
+  password: 0530a93d66a959ed8eff8ebf7915508643f3f036fb282453d96aa955ac6c208b
+  host: ec2-54-225-88-199.compute-1.amazonaws.com
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -88,6 +89,7 @@ test:
 #
 production:
   <<: *default
+  database: d7c996ieo37bei
   adapter: postgresql
   encoding: unicode
   username: vjzsoqvyhyllrl
