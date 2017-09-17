@@ -5,30 +5,17 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-projects:
- - title: 'Семья'
-   todos:
-    - text: 'Купить молоко'
-      isCompleted: false
-    - text: 'Заменить масло в двигателе до 23 апреля'
-      isCompleted: false
-    - text: 'Отправить письмо бабушке'
-      isCompleted: true
-    - text: 'Заплатить за квартиру'
-      isCompleted: false
-    - text: 'Забрать обувь из ремонта'
-      isCompleted: false
- - title: 'Работа'
-   todos:
-    - text: 'Позвонить заказчику'
-      isCompleted: true
-    - text: 'Отправить документы'
-      isCompleted: true
-    - text: 'Заполнить отчет'
-      isCompleted: false
- - title: 'Прочее'
-   todos:
-    - text: 'Позвонить другу'
-      isCompleted: false
-    - text: 'Подготовиться к поездке'
-      isCompleted: false
+seed_file = Rails.root.join('db', 'seeds.yml')
+config = YAML::load_file(seed_file)
+config=config.to_h
+hash = ActiveSupport::HashWithIndifferentAccess.new(config)
+hash[:project].each{|x|
+projid=Project.create(title:x[:title])
+x[:todos].each{|y|
+
+hash_todo = ActiveSupport::HashWithIndifferentAccess.new({text:y[:text],project_id:projid.id,isCompleted:y[:isCompleted]})
+
+todos=Todo.create(hash_todo)
+}
+
+}
