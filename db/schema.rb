@@ -13,18 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20170913212556) do
 
-  create_table "projects", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
-  create_table "todos", force: :cascade do |t|
-    t.string   "text"
-    t.boolean  "isComplete"
-    t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
 
 end
