@@ -7,16 +7,16 @@
 default: &default
   adapter: postgresql
   encoding: unicode    
-  username: khdiiyluqkznpb
-  password: 99fbe76446cfaeced378b0319ed05c88e28f86511b8b931334631ecc3c9d142a
-  host: ec2-107-20-214-99.compute-1.amazonaws.com
+  username: asoajjkukcvyoa
+  password: 19dd902d154ffd366d5ecd097f6c82df84c9b0cb11b8d779346b6fb117c1f93f
+  host: ec2-107-21-109-15.compute-1.amazonaws.com
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
 development:
   <<: *default
-  database: d4ceeb30p00esd
+  database: d4kssb7ot4dp9
   
 
 # Warning: The database defined as "test" will be erased and
@@ -24,9 +24,9 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: d4ceeb30p00esd
+  database: d4kssb7ot4dp9
   
 
 production:
   <<: *default
-  database: d4ceeb30p00esd
+  database: d4kssb7ot4dp9
